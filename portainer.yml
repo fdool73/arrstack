@@ -1,0 +1,17 @@
+services:
+  # Portainer - WebUI for Containers
+  portainer:
+    container_name: portainer
+    image: portainer/portainer-ee:latest 
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    networks:
+      - socket_proxy
+    command: -H tcp://socket-proxy:2375
+    ports:
+      - "9000:9000"
+    volumes:
+      - $DOCKERDIR/appdata/portainer/data:/data # Change to local directory if you want to save/transfer config locally
+    environment:
+      - TZ=$TZ

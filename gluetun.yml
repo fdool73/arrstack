@@ -1,0 +1,30 @@
+services:
+  # Gluetun - VPN Client for Docker Containers and More
+  # Gluetun only for use by torrent clients + on demand lan devices.
+  # Arr apps do not need VPN (not recommended), unless you have ISP/country restrictions.
+  gluetun:
+    image: qmcgaw/gluetun
+    container_name: gluetun
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    networks:
+      - socket_proxy
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+    ports:
+      - 8080:8080
+      - 6881:6881
+      - 6881:6881/udp
+    volumes:
+      - $DOCKERDIR/appdata/gluetun:/gluetun
+    environment:
+      TZ: $TZ
+      # OpenVPN using Purevpn asn an example
+      VPN_SERVICE_PROVIDER: purevpn
+      VPN_TYPE: openvpn
+      OPENVPN_USER: $PUREVPN_USERNAME
+      OPENVPN_PASSWORD: $PUREVPN_PASSWORD
+      SERVER_COUTRIES: $VPN_COUNTRY

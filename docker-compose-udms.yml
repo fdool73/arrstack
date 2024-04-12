@@ -1,0 +1,52 @@
+version: "3.9"
+
+########################### NETWORKS
+networks:
+  default:
+    driver: bridge
+  socket_proxy:
+    name: socket_proxy
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.91.0/24
+
+########################### SECRETS
+secrets:
+  plex_claim:
+    file: $DOCKERDIR/secrets/plex_claim
+  mysql_root_password:
+    file: $DOCKERDIR/secrets/mysql_root_password
+
+include:
+  ########################### SERVICES
+  #CORE
+  - compose/$HOSTNAME/socket-proxy.yml
+  - compose/$HOSTNAME/portainer.yml
+  - compose/$HOSTNAME/dozzle.yml
+  
+  #MEDIA
+  - compose/$HOSTNAME/plex.yml
+
+  # DOWNLOADERS
+  - compose/$HOSTNAME/sabnzbd.yml
+  - compose/$HOSTNAME/qbittorrent.yml
+
+  # PVRS
+  - compose/$HOSTNAME/radarr.yml
+  - compose/$HOSTNAME/sonarr.yml
+  - compose/$HOSTNAME/prowlarr.yml
+
+  # COMPLEMENTARY APPS
+  - compose/$HOSTNAME/bazarr.yml
+
+  # MONITORING
+  - compose/$HOSTNAME/uptime-kuma.yml
+
+  # UTILITIES
+  - compose/$HOSTNAME/filebrowser.yml
+  - compose/$HOSTNAME/firefox.yml
+  - compose/$HOSTNAME/gluetun.yml
+
+  # MAINTENANCE
+  - compose/$HOSTNAME/docker-gc.yml

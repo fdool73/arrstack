@@ -1,0 +1,12 @@
+services:
+  # Uptime Kuma - Status Page & Monitoring Server
+  uptime-kuma:
+    image: louislam/uptime-kuma
+    container_name: uptime-kuma
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    networks:
+      - default
+    volumes:
+      - $DOCKERDIR/appdata/uptime-kuma:/app/data

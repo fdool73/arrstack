@@ -1,0 +1,19 @@
+services:
+  filebrowser:
+    image: filebrowser/filebrowser:s6
+    container_name: filebrowser
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    networks:
+      - default
+    ports:
+      - "81:80"
+    volumes:
+      - $DOCKERDIR/appdata/filebrowser/filebrowser.db:/database.db
+      - $DOCKERDIR/appdata/filebrowser:/srv
+      - $DOCKERDIR/appdata/.filebrowser.json:/.filebroser.json
+    environment:
+      TZ: $TZ
+      PUID: $PUID
+      PGID: $PGID
