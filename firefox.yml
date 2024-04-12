@@ -1,5 +1,5 @@
 services:
-  # Firefox - Web Broswer (SSL and Dark Mode enabled)
+  # Firefox - Web Browser (SSL and Dark Mode enabled)
   firefox:
     image: jlesage/firefox:latest
     container_name: firefox

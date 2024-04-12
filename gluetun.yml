@@ -22,9 +22,9 @@ services:
       - $DOCKERDIR/appdata/gluetun:/gluetun
     environment:
       TZ: $TZ
-      # OpenVPN using Purevpn asn an example
-      VPN_SERVICE_PROVIDER: purevpn
-      VPN_TYPE: openvpn
-      OPENVPN_USER: $PUREVPN_USERNAME
-      OPENVPN_PASSWORD: $PUREVPN_PASSWORD
-      SERVER_COUTRIES: $VPN_COUNTRY
+      # OpenVPN 
+      VPN_SERVICE_PROVIDER: 
+      VPN_TYPE: 
+      OPENVPN_USER: 
+      OPENVPN_PASSWORD: 
+      SERVER_COUTRIES: 
