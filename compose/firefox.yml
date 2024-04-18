@@ -13,7 +13,7 @@ services:
       - "5800:5800"
     volumes:
       - $DOCKERDIR/appdata/firefox:/config
-      - $DOWNLOADSDIR:/data/downloads
+      - $DATADIR/downloads:/data/downloads
       - /dev/shm:/dev/shm
     environment:
       USER_ID: $PUID

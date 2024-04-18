@@ -9,7 +9,7 @@ services:
     network_mode: "service:gluetun"
     volumes:
       - $DOCKERDIR/appdata/qbittorrent:/config
-      - $DOWNLOADSDIR:/data/downloads # Ensure that downloads folder is set to /data/downloads in qBittorrent
+      - $DATADIR/downloads:/data/downloads
     environment:
       TZ: $TZ
       PUID: $PUID

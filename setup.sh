@@ -5,12 +5,8 @@
 
 set -euo pipefail  # Exit on error and unset variables
 
-# Variables
-USERNAME=""  # Replace with your username
-USERDIR=""  # Replace with your user's home directory
-USB_PARTITION=""  # Replace with your USB drive's partition
-MOUNT_POINT=""  # Replace with drive name from lsblk
-ADMIN_IP=""  # Replace with IP or CIDR block of allowed addresses for SSH
+# Load environment variables
+source .env
 
 # Update and install necessary packages
 sudo apt update && sudo apt -y install \
@@ -25,25 +21,31 @@ echo "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -c
 sudo systemctl enable --now docker
 
 # Setup USB drive with permissions
-sudo mkdir -p "$MOUNT_POINT"
+sudo mkdir -p "${DATADIR}"
 sudo mkfs.ext4 -F "$USB_PARTITION"  # Force creating filesystem without prompt
-sudo mount "$USB_PARTITION" "$MOUNT_POINT"
-echo "$USB_PARTITION $MOUNT_POINT ext4 defaults 0 0" | sudo tee -a /etc/fstab
-sudo chown -R "$USERNAME:$USERNAME" "$MOUNT_POINT"
-sudo chmod -R 755 "$MOUNT_POINT"
+sudo mount "$USB_PARTITION" "${DATADIR}"
+echo "$USB_PARTITION ${DATADIR} ext4 defaults 0 0" | sudo tee -a /etc/fstab
 
-# Create media directories with permissions
-for dir in downloads movies shows; do
-    mkdir -p "$MOUNT_POINT/$dir"
-    sudo chown -R "$USERNAME:$USERNAME" "$MOUNT_POINT/$dir"
-    sudo chmod -R 755 "$MOUNT_POINT/$dir"
+echo "Setting ownership to ${USERNAME}:${USERNAME}"
+sudo chown -R "${USERNAME}:${USERNAME}" "${DATADIR}"
+echo "Setting permissions to 775"
+sudo chmod -R 775 "${DATADIR}"
+
+# Create and adjust permissions for media directories
+for dir in data data2 downloads media; do
+    mkdir -p "${DATADIR}/${dir}"
+    echo "Setting ownership for ${DATADIR}/${dir} to ${USERNAME}:${USERNAME}"
+    sudo chown -R "${USERNAME}:${USERNAME}" "${DATADIR}/${dir}"
+    echo "Setting permissions for ${DATADIR}/${dir} to 775"
+    sudo chmod -R 775 "${DATADIR}/${dir}"
 done
 
-# Setup Docker directories and environment
-DOCKER_DIR="$USERDIR/docker"
-sudo mkdir -p "$DOCKER_DIR"
-sudo chown -R "$USERNAME:$USERNAME" "$DOCKER_DIR"
-sudo chmod -R 755 "$DOCKER_DIR"
+# Specifically create and set permissions for the 'incomplete' subdirectory in 'downloads'
+mkdir -p "${DATADIR}/downloads/incomplete"
+echo "Setting ownership for ${DATADIR}/downloads/incomplete to ${USERNAME}:${USERNAME}"
+sudo chown -R "${USERNAME}:${USERNAME}" "${DATADIR}/downloads/incomplete"
+echo "Setting permissions for ${DATADIR}/downloads/incomplete to 775"
+sudo chmod -R 775 "${DATADIR}/downloads/incomplete"
 
 # UFW configuration
 sudo ufw allow 81/tcp 3005/tcp 5800/tcp 6881/tcp 8080/tcp 8082/tcp 8084/tcp 9000/tcp

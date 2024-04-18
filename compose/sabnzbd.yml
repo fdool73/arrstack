@@ -1,5 +1,4 @@
 services:
-  # SABnzbd - Binary newsgrabber (NZB downloader)
   sabnzbd:
     image: lscr.io/linuxserver/sabnzbd:latest
     container_name: sabnzbd
@@ -12,9 +11,9 @@ services:
       - "8084:8080"
     volumes:
       - $DOCKERDIR/appdata/sabnzbd:/config
-      - $DOWNLOADSDIR:/data/downloads
+      - $DATADIR/downloads:/data/downloads
     environment:
-      PUID: $PUID
-      PGID: $PGID
-      TZ: $TZ
+      PUID: ${PUID}
+      PGID: ${PGID}
+      TZ: ${TZ}
       UMASK_SET: 002

@@ -12,9 +12,8 @@ services:
       - "8989:8989"
     volumes:
       - $DOCKERDIR/appdata/sonar:/config
-      - $DATADIR/shows:/data/shows
-      - $DOWNLOADSDIR:/data/downloads 
-      - "/etc/localtime:/etc/localtime:ro"
+      - $DATADIR/data/media/shows:/data/shows
+      - $DATADIR/downloads:/data/downloads 
     environment:
       TZ: $TZ
       PUID: $PUID
