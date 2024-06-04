@@ -31,21 +31,17 @@ sudo chown -R "${USERNAME}:${USERNAME}" "${DATADIR}"
 echo "Setting permissions to 775"
 sudo chmod -R 775 "${DATADIR}"
 
-# Create and adjust permissions for media directories
-for dir in data data2 downloads media; do
-    mkdir -p "${DATADIR}/${dir}"
-    echo "Setting ownership for ${DATADIR}/${dir} to ${USERNAME}:${USERNAME}"
-    sudo chown -R "${USERNAME}:${USERNAME}" "${DATADIR}/${dir}"
-    echo "Setting permissions for ${DATADIR}/${dir} to 775"
-    sudo chmod -R 775 "${DATADIR}/${dir}"
+# Create and adjust permissions for the new media directories
+for category in downloads; do
+    for type in movies music books tv torrents incomplete complete; do
+        dir="${DATADIR}/data/${category}/${type}"
+        mkdir -p "${dir}"
+        echo "Setting ownership for ${dir} to ${USERNAME}:${USERNAME}"
+        sudo chown -R "${USERNAME}:${USERNAME}" "${dir}"
+        echo "Setting permissions for ${dir} to 775"
+        sudo chmod -R 775 "${dir}"
+    done
 done
-
-# Specifically create and set permissions for the 'incomplete' subdirectory in 'downloads'
-mkdir -p "${DATADIR}/downloads/incomplete"
-echo "Setting ownership for ${DATADIR}/downloads/incomplete to ${USERNAME}:${USERNAME}"
-sudo chown -R "${USERNAME}:${USERNAME}" "${DATADIR}/downloads/incomplete"
-echo "Setting permissions for ${DATADIR}/downloads/incomplete to 775"
-sudo chmod -R 775 "${DATADIR}/downloads/incomplete"
 
 # UFW configuration
 sudo ufw allow 81/tcp 3005/tcp 5800/tcp 6881/tcp 8080/tcp 8082/tcp 8084/tcp 9000/tcp

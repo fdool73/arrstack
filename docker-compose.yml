@@ -1,9 +1,12 @@
-version: "3.9"
-
 ########################### NETWORKS
 networks:
   default:
     driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "192.168.48.0/24"
+          gateway: "192.168.48.1"
   socket_proxy:
     name: socket_proxy
     driver: bridge
@@ -15,8 +18,6 @@ networks:
 secrets:
   plex_claim:
     file: $DOCKERDIR/secrets/plex_claim
-  mysql_root_password:
-    file: $DOCKERDIR/secrets/mysql_root_password
 
 include:
   ########################### SERVICES
@@ -40,11 +41,20 @@ include:
 
   # COMPLEMENTARY APPS
   - compose/bazarr.yml
+  - compose/overseer.yml
 
   # MONITORING
   - compose/uptime-kuma.yml
 
   # UTILITIES
   - compose/firefox.yml
-  - compose/gluetun.yml
+  - compose/wireguard.yml
+  - compose/homeassistant.yml
+
+  # WEBSERVER
+  - compose/caddy.yml
+ 
+  # METRICS
+  - compose/grafana.yml
+  - compose/prometheus.yml
 

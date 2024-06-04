@@ -1,0 +1,23 @@
+services:
+  wireguard:
+    image: linuxserver/wireguard
+    container_name: wireguard
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+    volumes:
+      - $DOCKERDIR/appdata/wireguard:/config
+    ports:
+      - 51820:51820/udp
+      - 8080:8080  # WebUI port for qBittorrent
+      - 6881:6881  # Torrenting port for qBittorrent
+      - 6881:6881/udp  # Torrenting UDP port for qBittorrent
+    restart: unless-stopped
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+    networks:
+      - default
+      - socket_proxy

@@ -1,5 +1,4 @@
 services:
-  # Prowlarr - Torrent proxy
   prowlarr:
     image: ghcr.io/linuxserver/prowlarr:develop
     container_name: prowlarr
@@ -7,7 +6,8 @@ services:
       - no-new-privileges:true
     restart: unless-stopped
     networks:
-      - default
+      default:
+        ipv4_address: 192.168.48.30
     ports:
       - "9696:9696"
     volumes:
@@ -17,3 +17,4 @@ services:
       TZ: $TZ
       PUID: $PUID
       PGID: $PGID
+

@@ -23,12 +23,9 @@ Ensure you have Git installed on your system. This is required to clone the repo
 3. Deploy the services using Docker:
    docker compose up -d
 
-## TODO
+## Info
 
-- Create app config default `.conf` and cron backups for appdata (API keys, settings, etc.).
-- Add Docker labels.
-- Create Nginx/Traefik reverse proxy for internal network only (no internet exposure).
-- Document images and ports.
+- To run portainer password reset: from appdata/portainer/data: docker run --rm -v $(pwd):/data portainer/helper-reset-password
 
 ## Maintainer
 

@@ -1,5 +1,4 @@
 services:
-  # Portainer - WebUI for Containers
   portainer:
     container_name: portainer
     image: portainer/portainer-ee:latest 
@@ -15,3 +14,4 @@ services:
       - $DOCKERDIR/appdata/portainer/data:/data # Change to local directory if you want to save/transfer config locally
     environment:
       - TZ=$TZ
+

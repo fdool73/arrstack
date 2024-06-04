@@ -1,5 +1,4 @@
 services:
-  # Sonarr - TV Shows Management
   sonarr:
     image: lscr.io/linuxserver/sonarr:develop
     container_name: sonarr
@@ -7,14 +6,15 @@ services:
       - no-new-privileges:true
     restart: "no"
     networks:
-      - default
+      default:
+        ipv4_address: 192.168.48.60
     ports:
       - "8989:8989"
     volumes:
       - $DOCKERDIR/appdata/sonar:/config
-      - $DATADIR/data/media/shows:/data/shows
-      - $DATADIR/downloads:/data/downloads 
+      - $DATADIR/media/shows:/data/shows
     environment:
       TZ: $TZ
       PUID: $PUID
       PGID: $PGID
+      UMASK: 002

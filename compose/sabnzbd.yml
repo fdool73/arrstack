@@ -6,12 +6,13 @@ services:
       - no-new-privileges:true
     restart: unless-stopped
     networks:
-      - default
+      default:
+        ipv4_address: 192.168.48.50
     ports:
       - "8084:8080"
     volumes:
       - $DOCKERDIR/appdata/sabnzbd:/config
-      - $DATADIR/downloads:/data/downloads
+      - $DATADIR/downloads:/data/
     environment:
       PUID: ${PUID}
       PGID: ${PGID}

@@ -1,5 +1,4 @@
 services:
-  # Firefox - Web Browser (SSL and Dark Mode enabled)
   firefox:
     image: jlesage/firefox:latest
     container_name: firefox
@@ -8,7 +7,8 @@ services:
       - seccomp:unconfined 
     restart: unless-stopped
     networks:
-      - default
+      default:
+        ipv4_address: 192.168.48.9
     ports:
       - "5800:5800"
     volumes:
@@ -26,3 +26,4 @@ services:
       DISPLAY_HEIGHT: 1080
       SECURE_CONNECTION: 1
       DARK_MODE: 1
+

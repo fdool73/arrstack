@@ -1,5 +1,4 @@
 services:
-  # Uptime Kuma - Status Page & Monitoring Server
   uptime-kuma:
     image: louislam/uptime-kuma
     container_name: uptime-kuma
@@ -10,3 +9,5 @@ services:
       - default
     volumes:
       - $DOCKERDIR/appdata/uptime-kuma:/app/data
+    labels:
+      traefik.enable: "true"
