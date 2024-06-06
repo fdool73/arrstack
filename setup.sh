@@ -43,6 +43,11 @@ for category in downloads; do
     done
 done
 
+sudo touch ${DOCKERDIR}/appdata/grafana/datasources.yml
+sudo chown 472:472 ${DOCKERDIR}/appdata/grafana/datasources.yml
+sudo chmod 644 ${DOCKERDIR}/appdata/grafana/datasources.yml
+
+
 # UFW configuration
 sudo ufw allow 81/tcp 3005/tcp 5800/tcp 6881/tcp 8080/tcp 8082/tcp 8084/tcp 9000/tcp
 sudo ufw allow from $ADMIN_IP to any port 22

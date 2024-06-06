@@ -26,4 +26,9 @@ services:
       DISPLAY_HEIGHT: 1080
       SECURE_CONNECTION: 1
       DARK_MODE: 1
+    labels:
+      - "org.label-schema.version=${VERSION}"
+      - "org.label-schema.build-date=${BUILD_DATE}"
+      - "org.label-schema.vcs-ref=${VCS_REF}"
+      - "org.label-schema.vcs-url=https://github.com/fdool73/arrstack/compose/firefox"
 

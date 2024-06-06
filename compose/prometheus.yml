@@ -12,3 +12,10 @@ services:
       - $DOCKERDIR/appdata/prometheus:/etc/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
+    labels:
+      - "org.label-schema.version=${VERSION}"
+      - "org.label-schema.build-date=${BUILD_DATE}"
+      - "org.label-schema.vcs-ref=${VCS_REF}"
+      - "org.label-schema.vcs-url=https://github.com/fdool73/arrstack/compose/prometheus"
+    depends_on:
+      - cadvisor

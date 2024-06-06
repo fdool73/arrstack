@@ -6,14 +6,19 @@ services:
       - no-new-privileges:true
     restart: unless-stopped
     networks:
-      - default:
-        ipv4_address: 192.168.48.50
-      - socket_proxy
+      default:
+        ipv4_address: 192.168.48.90
+      socket_proxy:
     ports:
-      - "8082:8080"
+      - "8081:8080"
     environment:
       DOZZLE_LEVEL: info
       DOZZLE_TAILSIZE: 300
       DOZZLE_FILTER: "status=running"
       DOCKER_HOST: tcp://socket-proxy:2375
+    labels:
+      - "org.label-schema.version=${VERSION}"
+      - "org.label-schema.build-date=${BUILD_DATE}"
+      - "org.label-schema.vcs-ref=${VCS_REF}"
+      - "org.label-schema.vcs-url=https://github.com/fdool73/arrstack/compose/dozzle"
 
