@@ -58,4 +58,3 @@ include:
   - compose/grafana.yml
   - compose/prometheus.yml
   - compose/cadvisor.yml
-  - compose/node-explorer.yml
