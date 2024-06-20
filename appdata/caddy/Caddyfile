@@ -1,0 +1,103 @@
+# Global configuration options
+{
+    http_port 80
+    https_port 443
+    auto_https off
+    debug
+}
+
+# Static file server - Serving index.html and style.css
+http://192.168.4.156 {
+    root * /data/html
+    file_server
+    # Serve index.html as the main file
+    try_files {path} /index.html
+}
+
+# Homeassistant
+http://homeassistant.local {
+    @internal {
+        remote_ip 192.168.48.0/24
+    }
+    reverse_proxy @internal homeadsistant:8123
+}
+
+# Grafana
+http://grafana.local {
+    @internal {
+        remote_ip 192.168.48.0/24
+    }
+    reverse_proxy @internal homeadsistant:3000
+}
+
+# Radarr
+http://radarr.local {
+    @internal {
+        remote_ip 192.168.48.0/24
+    }
+    reverse_proxy @internal radarr:7878
+}
+
+# Bazarr
+http://bazarr.local {
+    @internal {
+        remote_ip 192.168.48.0/24
+    }
+    reverse_proxy @internal bazarr:6767
+}
+
+# Sonarr
+http://sonarr.local {
+    @internal {
+        remote_ip 192.168.48.0/24
+    }
+    reverse_proxy @internal sonarr:8989
+}
+
+# Prowlarr
+http://prowlarr.local {
+    @internal {
+        remote_ip 192.168.48.0/24
+    }
+    reverse_proxy @internal prowlarr:9696
+}
+
+# Portainer
+http://portainer.local {
+    @internal {
+        remote_ip 192.168.48.0/24
+    }
+    reverse_proxy @internal portainer:9000
+}
+
+# Overseer
+http://overseer.local {
+    @internal {
+        remote_ip 192.168.48.0/24
+    }
+    reverse_proxy @internal overseer:5055
+}
+
+# Firefox
+http://firefox.local {
+    @internal {
+        remote_ip 192.168.48.0/24
+    }
+    reverse_proxy @internal firefox:5800
+}
+
+# Sabnzbd
+http://sabnzbd.local {
+    @internal {
+        remote_ip 192.168.48.0/24
+    }
+    reverse_proxy @internal sabnzbd:8084
+}
+
+# Qbittorrent
+http://qbittorrent.local {
+    @internal {
+        remote_ip 192.168.48.0/24
+    }
+    reverse_proxy @internal sabnzbd:8080
+}

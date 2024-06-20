@@ -50,6 +50,7 @@ include:
   - compose/firefox.yml
   - compose/wireguard.yml
   - compose/homeassistant.yml
+  - compose/watchtower.yml
 
   # WEBSERVER
   - compose/caddy.yml
