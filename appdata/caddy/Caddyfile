@@ -19,7 +19,7 @@ http://homeassistant.local {
     @internal {
         remote_ip 192.168.48.0/24
     }
-    reverse_proxy @internal homeadsistant:8123
+    reverse_proxy @internal homeassistant:8123
 }
 
 # Grafana
@@ -27,7 +27,7 @@ http://grafana.local {
     @internal {
         remote_ip 192.168.48.0/24
     }
-    reverse_proxy @internal homeadsistant:3000
+    reverse_proxy @internal grafana:3000
 }
 
 # Radarr
