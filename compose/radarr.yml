@@ -13,7 +13,6 @@ services:
     volumes:
       - $DOCKERDIR/appdata/radarr:/config
       - $DATADIR/media/movies:/data/movies
-      - "/etc/localtime:/etc/localtime:ro"
     environment:
       TZ: ${TZ}
       PUID: ${PUID}
@@ -24,5 +23,3 @@ services:
       - "org.label-schema.vcs-ref=${VCS_REF}"
       - "org.label-schema.vcs-url=https://github.com/fdool73/arrstack/compose/radarr"
       - "com.centurylinklabs.watchtower.enable=true"
-
-    
