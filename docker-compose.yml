@@ -25,14 +25,12 @@ include:
   #CORE
   - compose/socket-proxy.yml
   - compose/portainer.yml
-  - compose/dozzle.yml
   
   #MEDIA
   - compose/plex.yml
 
   # DOWNLOADERS
   - compose/sabnzbd.yml
-  - compose/qbittorrent.yml
 
   # PVRS
   - compose/radarr.yml
@@ -43,14 +41,8 @@ include:
   - compose/bazarr.yml
   - compose/overseer.yml
 
-  # MONITORING
-  - compose/uptime-kuma.yml
-
   # UTILITIES
-  - compose/firefox.yml
-  - compose/wireguard.yml
   - compose/homeassistant.yml
-  - compose/watchtower.yml
 
   # WEBSERVER
   - compose/caddy.yml
@@ -58,4 +50,3 @@ include:
   # METRICS
   - compose/grafana.yml
   - compose/prometheus.yml
-  - compose/cadvisor.yml
