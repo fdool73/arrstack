@@ -54,12 +54,14 @@ sudo chmod -R 775 "${DATADIR}"
 
 # Create and adjust permissions for the new media directories
 directories=(
-    "downloads"
-    "downloads/torrents"
-    "downloads/incomplete"
+    "data"
     "media"
+    "data/usenet"
+    "data/usenet/downloads"
+    "data/usenet/downloads/complete"
+    "data/usenet/downloads/incomplete"
     "media/movies"
-    "media/shows"
+    "media/tv"
 )
 
 for dir in "${directories[@]}"; do

@@ -12,7 +12,8 @@ services:
       - "8989:8989"
     volumes:
       - $DOCKERDIR/appdata/sonar:/config
-      - $DATADIR/media/shows:/data/shows
+      - $DATADIR/media/tv:/data/shows
+      - $DATADIR/data/usenet/downloads/complete:/downloads
     environment:
       TZ: $TZ
       PUID: $PUID
@@ -23,4 +24,3 @@ services:
       - "org.label-schema.build-date=${BUILD_DATE}"
       - "org.label-schema.vcs-ref=${VCS_REF}"
       - "org.label-schema.vcs-url=https://github.com/fdool73/arrstack/compose/sonarr"
-      - "com.centurylinklabs.watchtower.enable=true"

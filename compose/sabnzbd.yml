@@ -24,4 +24,3 @@ services:
       - "org.label-schema.build-date=${BUILD_DATE}"
       - "org.label-schema.vcs-ref=${VCS_REF}"
       - "org.label-schema.vcs-url=https://github.com/fdool73/arrstack/compose/sabnzbd"
-      - "com.centurylinklabs.watchtower.enable=true"
